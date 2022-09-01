@@ -32,13 +32,14 @@ const Products = ({products, deleteProducts }) => {
     }));
 
     const handleDelete = (e) => {
-      e.preventDefault();
-
-      if (e.target.tagName === 'path'){
+      e.preventDefault();    
+      if(e.target.tagName === 'path'){
+        deleteProducts(e.target.parentElement.parentElement.dataset.id);
+      }else if(e.target.tagName === 'svg'){
         deleteProducts(e.target.parentElement.dataset.id);
-      }else{
+      }else {
         deleteProducts(e.target.dataset.id);
-      }      
+      }  
     }
 
     const loaded = () => {
