@@ -8,30 +8,45 @@ const Home = ({products}) => {
     }
 
     const loaded = () => {
-        return products.map(({ _id, name, price, stock, image }) => {
-            return (
-                <Box key={_id} className='product-container'>
-                    <Paper>
-                        <Link to={`/products/${_id}`}>
-                        <img src={image} className='product-image' alt={name} />
-                        </Link>
-                        <div>
-                            <Link to={`/products/${_id}`}>
-                                <h1>{name}</h1> 
-                            </Link>
-                            <h2>Price: ${price}</h2>
-                            <h2>Stock: {stock}</h2>
-                        </div>
-                    </Paper>
-                </Box>
-            )
-        })
+        return (
+            <>
+            {
+                products.map(({ _id, name, price, stock, image }) => {
+                    return (
+                        <Box key={_id} className='item-container'>
+                            <Paper>
+                                <Link to={`/${_id}`}>
+                                    <img src={image} className='product-image' alt={name} />
+                                </Link>
+                                <div className="product-info">
+                                    {
+                                        stock > 0 ? <p>In Stock</p> : <p>Out of Stock</p>
+                                    }
+                                    <Link to={`/${_id}`} className='title'>
+                                        {name} 
+                                    </Link>
+                                    <div className="price-stock">
+                                        <h3>${price}</h3>
+                                    </div>
+                                </div>
+                            </Paper>
+                        </Box>
+                    )
+                })
+            }
+            </>
+        )
     }
 
     return(
         <>
-            <div className="container">
-                {products ? loaded() : loading() }
+            <div className="main-container">
+                <Box className="home-banner-container">
+                    <img src="https://i.pinimg.com/originals/d0/b6/5c/d0b65c5c53657f897af6862c44d8a5e2.jpg" alt="banner" className="home-banner-img"/>
+                </Box>
+                <Box className="products-container">
+                    { products ? loaded() : loading() }
+                </Box>
             </div>
         </>
     )
