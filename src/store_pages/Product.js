@@ -20,6 +20,10 @@ const Product = ({products}) => {
                         <h1 className="product-page-title">{product.name}</h1>
                         <p><span>SKU: </span>{product.sku}</p>
                         <p><span>Brand: </span>{product.brand}</p>
+                        {
+                            product.size !== '' ? <p><span>Size: </span>{product.size}</p> 
+                            : null
+                        }
                         <p><span>Price: </span>${product.price}</p>
                     </div>
                     { product.description !== '' ? <p><span>Description: </span> { product.description }</p> : null}

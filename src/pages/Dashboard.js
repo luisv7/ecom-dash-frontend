@@ -1,18 +1,7 @@
-import { Box } from '@mui/material';
-import { Paper } from '@mui/material'
+import { Link } from 'react-router-dom';
+import { Box, Paper, Button } from '@mui/material';
 
 const Dashboard = ({products}) => {
-
-    const loaded = () => {
-        return (
-            <Box className='box-container'>
-                <Paper elevation={1} className='dashboard-paper'> 
-                    <h2>Number of Products</h2>
-                    <h3>{products.length}</h3>
-                </Paper>
-            </Box>
-        )
-    }
 
     const loading= () => {
         return (
@@ -20,6 +9,27 @@ const Dashboard = ({products}) => {
                 <h1>Loading...</h1>
             </div>
             
+        )
+    }
+
+    const loaded = () => {
+        return (
+            <>
+                <Box className='admin-container-header'>
+                    <h2>Dashboard</h2>
+                    <Link to='/'>
+                        <Button variant="contained">View Website</Button>
+                    </Link>
+                </Box>
+                <Box className='box-container'>
+                    <Paper elevation={1} className='dashboard-paper'> 
+                        <h3>Number of Products</h3>
+                        <Link to='/admin/products'>
+                            {products.length}
+                        </Link>
+                    </Paper>
+                </Box>
+            </>
         )
     }
 

@@ -1,12 +1,21 @@
-import { useState } from 'react';
-import { Box, Button, List, ListItem, ListItemButton, ListItemText, SwipeableDrawer} from '@mui/material';
+import { useEffect, useState } from 'react';
+import { logout } from "../firebase";
+import { Box, Button, List, ListItem, ListItemButton, ListItemText, SwipeableDrawer, Divider} from '@mui/material';
 import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const Menu = () => {
+const Menu = ({user, profiles, getProfiles}) => {
   const [state, setState] = useState({
     left: false,
   });
+
+  const loading = () => {
+    return <h1>Loading...</h1>
+  }
+
+  const userProfile = profiles.find((el) => {
+        return el.uid === user.uid
+  }) 
 
   const toggleDrawer = (anchor, open) => () => {
     setState({[anchor]: open });
@@ -20,20 +29,39 @@ const Menu = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['','Dashboard', 'Products', 'Settings'].map((text) => (
-
-          <ListItem key={text} component={Link} to={`/${text.toLowerCase()}`} disablePadding>
-            <ListItemButton>
-              <ListItemText primary={text === '' ? 'View Website' : text} sx={{color: 'black'}}/>
+        <Link to='/'>
+          <ListItemButton>
+                <ListItemText primary='View Website' sx={{color: 'black'}}/>
+          </ListItemButton>
+        </Link>
+        <Divider />
+        {
+          ['Dashboard', 'Products', 'Settings'].map((text, index) => (
+            <ListItem key={index} component={Link} to={`/admin/${text.toLowerCase()}`} disablePadding>
+              <ListItemButton>
+                <ListItemText primary={text} sx={{color: 'black'}}/>
+              </ListItemButton>
+            </ListItem>
+          ))
+        }
+        <Divider/>
+        {
+          user ? 
+          <>
+            <ListItemButton onClick={logout}>
+              <ListItemText primary='Logout' sx={{color: 'black'}}/>
             </ListItemButton>
-          </ListItem>
-        ))}
+          </>
+          : null
+        }
       </List>
     </Box>
   );
 
-  return (
-    <div className='nav'>
+  const loaded = () => {
+
+    return (
+      <div className='nav'>
       {
         ['left'].map((anchor) => (
           <div key={anchor}>
@@ -51,8 +79,22 @@ const Menu = () => {
           </div>
         ))
       }
-      <h1 className='logo'>Ecom Dash</h1>
-    </div>
+        <Link className='logo' to='/'>
+          { 
+            userProfile ? userProfile.storeTitle : user.displayName + "'s Store"
+          }
+        </Link>
+      </div>
+    )
+  }
+
+  useEffect(() => {
+      getProfiles();
+      // eslint-disable-next-line
+  },[])
+
+  return (
+      user ? loaded() : loading()
   );
 }
 

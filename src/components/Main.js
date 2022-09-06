@@ -13,57 +13,81 @@ import CreateProduct from '../pages/CreateProduct';
 import UpdateProduct from '../pages/UpdateProduct';
 import Settings from '../pages/Settings';
 
-const Main = ({ user }) => {
+const Main = ({ user, profiles, createProfile, getProfiles }) => {
     const [ products, setProducts ] = useState(null);
+    // const [ publicProducts, setPublicProducts ] = useState(null);
 
     const API_URL = 'http://localhost:3000/api/products';
+    // const API_PUBLIC = 'http://localhost:3000/api/public';
   
     const PrivateRoute = ({ children, user }) => {
-      if(user){
+        if(user){
         return children
-      }else{
+        }else{
         return <Navigate to="/"/>
-      }
+        }
     }
 
-      // PRODUCTS
+    // PRODUCTS
     const getProducts = async () => {
         try {
-            const response = await fetch(API_URL);
+            const token = await user.getIdToken();
+            const response = await fetch(API_URL,{
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            });
             const data = await response.json();
             setProducts(data);
-        } catch (error) {
-            console.log(error)
+        }catch (error) {
+                console.log(error)
+        }   
     }
-}
 
     const createProducts = async (product) => {
-        await fetch(API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(product)
-        });
+        try {
+            const token = await user.getIdToken();
+            await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify(product)
+            });
+        } catch (error) {
+            console.log(error)
+        }
         getProducts();
     }
     
     const updateProduct = async (id, product) => {
-        await fetch(`${API_URL}/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-type': 'Application/json'
-            },
-            body: JSON.stringify(product)
-        })
+        try {
+            const token = await user.getIdToken();
+            await fetch(`${API_URL}/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'Application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify(product)
+            })
+        } catch (error) {
+            console.log(error)
+        }
         getProducts();
     }
     
     const deleteProducts = async (id) => {
         try {
+            const token = await user.getIdToken();
             await fetch(`${API_URL}/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
             });
             
             getProducts();
@@ -75,14 +99,14 @@ const Main = ({ user }) => {
 
     useEffect(() => {
         getProducts();
+        // eslint-disable-next-line
     },[])
 
     return (
         <main>
-
             <Routes>
                 {/* Main Website */}
-                <Route path='/' element={<Home products={products} />}/>
+                <Route path='/' element={<Home products={products} profiles={profiles} user={user} getProfiles={getProfiles}/>}/>
                 <Route path='/:id' element={<Product products={products}/>}/>
                 <Route path='/admin' element={<Admin user={user}/>}/>
 
@@ -101,8 +125,7 @@ const Main = ({ user }) => {
                         <PrivateRoute user={user}>
                             <Products 
                                 products={products} 
-                                deleteProducts={deleteProducts} 
-                                updateProduct={updateProduct}
+                                deleteProducts={deleteProducts}
                             />
                         </PrivateRoute>
                     }
@@ -111,7 +134,7 @@ const Main = ({ user }) => {
                     path='/admin/settings' 
                     element={
                         <PrivateRoute user={user}>
-                            <Settings/>
+                            <Settings user={user} profiles={profiles} createProfile={createProfile}/>
                         </PrivateRoute>
                     }
                     />
@@ -121,6 +144,7 @@ const Main = ({ user }) => {
                         <PrivateRoute user={user}>
                             <CreateProduct 
                                 createProducts={createProducts}
+                                user={user}
                             />
                         </PrivateRoute>
                     }

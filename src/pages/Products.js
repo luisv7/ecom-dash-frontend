@@ -1,13 +1,22 @@
-import { styled, Button, Box, IconButton } from '@mui/material';
+import 
+  { 
+    Box, 
+    Paper, 
+    Table, 
+    styled, 
+    Button, 
+    TableRow, 
+    TableBody, 
+    TableCell, 
+    TableHead, 
+    IconButton, 
+    TableContainer, 
+    tableCellClasses 
+  } from '@mui/material';
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
 
 const Products = ({products, deleteProducts }) => {
 
@@ -45,18 +54,22 @@ const Products = ({products, deleteProducts }) => {
     const loaded = () => {
         return (
           <>
-          <Box sx={{display: 'flex', justifyContent: 'flex-end', alignContent: 'center', margin: '1rem' }}>
-            <Button variant='contained' href="/create-product">Create Product</Button>
+          <Box className='admin-container-header'>
+            <h2>Products List</h2>
+            <Link to='/admin/create-product'>
+              <Button variant="contained">Create Product</Button>
+            </Link>
           </Box>
           
           <TableContainer component={Paper} className='table-container'>
-            <Table sx={{ minWidth: 700 }} aria-label="Products">
+            <Table sx={{ minWidth: 600 }} aria-label="Products">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>SKU</StyledTableCell>
                   <StyledTableCell align="left">Image</StyledTableCell>
                   <StyledTableCell align="left">Name</StyledTableCell>
                   <StyledTableCell align="left">Stock</StyledTableCell>
+                  <StyledTableCell align="left">Size</StyledTableCell>
                   <StyledTableCell align="left">Cost</StyledTableCell>
                   <StyledTableCell align="left">Price</StyledTableCell>
                   <StyledTableCell align="left">Edit</StyledTableCell>
@@ -65,7 +78,7 @@ const Products = ({products, deleteProducts }) => {
               </TableHead>
               <TableBody>
                 {
-                    products.map(({_id, name, stock, cost, price, sku, image}) => (
+                    products.map(({_id, name, stock, cost, price, sku, image, size}) => (
                         <StyledTableRow key={_id}>
                             <StyledTableCell component="th" scope="row">
                             {sku}
@@ -73,12 +86,15 @@ const Products = ({products, deleteProducts }) => {
                             <StyledTableCell align="left"><img src={image} alt={name} className='product-list-img'/></StyledTableCell>
                             <StyledTableCell align="left">{name}</StyledTableCell>
                             <StyledTableCell align="left">{stock}</StyledTableCell>
+                            <StyledTableCell align="left">{size}</StyledTableCell>
                             <StyledTableCell align="left">${cost}</StyledTableCell>
                             <StyledTableCell align="left">${price}</StyledTableCell>
                             <StyledTableCell align="left">
-                                <IconButton href={`/update-product/${_id}`}>
+                              <Link to={`/admin/update-product/${_id}`}>
+                                <IconButton>
                                   <EditIcon sx={{color: "#1971bd"}}/>
                                 </IconButton>
+                              </Link>
                             </StyledTableCell>
                             <StyledTableCell align="left">
                                 <IconButton onClick={handleDelete} data-id={_id}>
