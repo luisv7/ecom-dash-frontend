@@ -200,10 +200,10 @@ const UpdateProduct = ({products, updateProduct}) => {
                     />
                     </div>
                 </Paper>
-            </Box>
-            <Box className="create-form-button-container">
-                <Button type="submit" variant="contained">Update Item</Button>
-                <Button type="button" variant='contained' color="error" href="/admin/products">Cancel</Button>
+                <Box className="create-form-button-container">
+                    <Button type="submit" variant="contained">Update Item</Button>
+                    <Button type="button" variant='contained' color="error" href="/admin/products">Cancel</Button>
+                </Box>
             </Box>
         </>
         )
