@@ -8,7 +8,7 @@ function App() {
   const [ user, setUser ] = useState(null);
   const [ profiles, setProfiles ] = useState([]);
 
-  const API_PROFILES = 'http://localhost:3000/api/profiles';
+  const API_PROFILES = 'https://ecom-dash-v1.herokuapp.com/api/profiles';
 
   // PROFILES
   const getProfiles = async () => {
