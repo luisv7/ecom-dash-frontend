@@ -17,7 +17,7 @@ const Main = ({ user, profiles, createProfile, getProfiles }) => {
     const [ products, setProducts ] = useState(null);
     // const [ publicProducts, setPublicProducts ] = useState(null);
 
-    const API_URL = 'https://ecom-dash-v1.herokuapp.com/admin/api/products';
+    const API_URL = 'https://ecom-dash-v1.herokuapp.com/api/products';
     // const API_PUBLIC = 'http://localhost:3000/api/public';
   
     const PrivateRoute = ({ children, user }) => {
