@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
-import { TextField, Input } from "@mui/material";
+import { TextField, Input, Paper } from "@mui/material";
 
 const UpdateProduct = ({products, updateProduct}) => {
     const navigate = useNavigate();
@@ -50,140 +50,159 @@ const UpdateProduct = ({products, updateProduct}) => {
             component="form"
             sx={{
                 '& .MuiTextField-root': { m: 1, width: '25ch' },
+                p: '1rem',
+                display: 'flex',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                gap: '1rem'
             }}
             noValidate
             autoComplete="off"
             onSubmit={handleUpdate}
+            className="create-form-button"
             >
-            <div className="create-form-container">
+                <Paper sx={{p: '1rem'}}>
+                    <h2>Product Information</h2>
+                    <div className="create-text-field-container">
                     <TextField
-                    required
-                    type='text'
-                    id="outlined-required"
-                    label="Name"
-                    name="name"
-                    value={updateForm.name}
-                    onChange={handleChange}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
+                        required
+                        type='text'
+                        id="outlined-required"
+                        label="Name"
+                        name="name"
+                        value={updateForm.name}
+                        onChange={handleChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                     <TextField
-                    type="number"
-                    id="outlined-number"
-                    label="Cost"
-                    name="cost"
-                    value={updateForm.cost}
-                    onChange={handleChange}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
+                        type="text"
+                        id="outlined-number"
+                        label="SKU"
+                        name="sku"
+                        value={updateForm.sku}
+                        onChange={handleChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                     <TextField
-                    required
-                    type="number"
-                    id="outlined-number"
-                    label="Price"
-                    name="price"
-                    value={updateForm.price}
-                    onChange={handleChange}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
+                        type="text"
+                        id="outlined-number"
+                        label="Brand"
+                        name="brand"
+                        value={updateForm.brand}
+                        onChange={handleChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                     <TextField
-                    type="number"
-                    id="outlined-number"
-                    label="Stock"
-                    name="stock"
-                    value={updateForm.stock}
-                    onChange={handleChange}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
+                        type="text"
+                        id="outlined-number"
+                        label="Image"
+                        name="image"
+                        value={updateForm.image}
+                        onChange={handleChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                     <TextField
-                    type="text"
-                    id="outlined-number"
-                    label="SKU"
-                    name="sku"
-                    value={updateForm.sku}
-                    onChange={handleChange}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
+                        type="text"
+                        id="outlined-number"
+                        label="Category"
+                        name="category"
+                        value={updateForm.category}
+                        onChange={handleChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                     <TextField
-                    type="text"
-                    id="outlined-number"
-                    label="Image"
-                    name="image"
-                    value={updateForm.image}
-                    onChange={handleChange}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
+                        multiline
+                        id="outlined-multiline-flexible"
+                        label="Description"
+                        name="description"
+                        maxRows={5}
+                        value={updateForm.description}
+                        onChange={handleChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                    </div>
+                </Paper>
+                <Paper sx={{p: '1rem'}}>
+                    <h2>Pricing</h2>
+                    <div className="create-text-field-container">
+                        <TextField
+                            type="number"
+                            id="outlined-number"
+                            label="Cost"
+                            name="cost"
+                            value={updateForm.cost}
+                            onChange={handleChange}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                        <TextField
+                            required
+                            type="number"
+                            id="outlined-number"
+                            label="Price"
+                            name="price"
+                            value={updateForm.price}
+                            onChange={handleChange}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                    </div>
+                </Paper>
+                <Paper sx={{p: '1rem'}}>
+                    <h2>Inventory</h2>
+                    <div className="create-text-field-container">
+                    <TextField
+                        type="number"
+                        id="outlined-number"
+                        label="Stock"
+                        name="stock"
+                        value={updateForm.stock}
+                        onChange={handleChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                     <TextField
-                    type="text"
-                    id="outlined-number"
-                    label="Size"
-                    name="size"
-                    value={updateForm.size}
-                    onChange={handleChange}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
+                        type="text"
+                        id="outlined-number"
+                        label="Size"
+                        name="size"
+                        value={updateForm.size}
+                        onChange={handleChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                     <TextField
-                    type="text"
-                    id="outlined-number"
-                    label="Color"
-                    name="color"
-                    value={updateForm.color}
-                    onChange={handleChange}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
+                        type="text"
+                        id="outlined-number"
+                        label="Color"
+                        name="color"
+                        value={updateForm.color}
+                        onChange={handleChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
-                    <TextField
-                    type="text"
-                    id="outlined-number"
-                    label="Brand"
-                    name="brand"
-                    value={updateForm.brand}
-                    onChange={handleChange}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    />
-                    <TextField
-                    type="text"
-                    id="outlined-number"
-                    label="Category"
-                    name="category"
-                    value={updateForm.category}
-                    onChange={handleChange}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    />
-                    <TextField
-                    multiline
-                    id="outlined-multiline-flexible"
-                    label="Description"
-                    name="description"
-                    maxRows={5}
-                    value={updateForm.description}
-                    onChange={handleChange}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    />
-                </div>
-                <Box className="create-form-button">
-                    <Input type="submit" value="Update Item" sx={{ backgroundColor: 'black', color: 'white', padding: '.3rem', cursor: 'pointer'}}/>
-                </Box>
+                    </div>
+                </Paper>
+            </Box>
+            <Box className="create-form-button-container">
+                <Input type="submit" value="Update Item" sx={{ backgroundColor: 'black', color: 'white', padding: '.3rem', cursor: 'pointer'}}/>
             </Box>
         </>
         )
