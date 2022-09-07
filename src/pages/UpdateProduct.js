@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
-import { TextField, Input, Paper } from "@mui/material";
+import { TextField, Button, Paper } from "@mui/material";
 
 const UpdateProduct = ({products, updateProduct}) => {
     const navigate = useNavigate();
@@ -202,7 +202,8 @@ const UpdateProduct = ({products, updateProduct}) => {
                 </Paper>
             </Box>
             <Box className="create-form-button-container">
-                <Input type="submit" value="Update Item" sx={{ backgroundColor: 'black', color: 'white', padding: '.3rem', cursor: 'pointer'}}/>
+                <Button type="submit" variant="contained">Update Item</Button>
+                <Button type="button" variant='contained' color="error" href="/admin/products">Cancel</Button>
             </Box>
         </>
         )
