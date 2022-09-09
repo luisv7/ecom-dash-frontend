@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Box } from "@mui/system";
 import { Button, Paper, TextField } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
+import { useNavigate } from 'react-router-dom';
 
 const Settings = ({user, createProfile}) => {
     const [newForm, setNewForm ] = useState({
