@@ -21,8 +21,11 @@ const Settings = ({user, createProfile}) => {
         }));
     }
 
+    const navigate = useNavigate();
+
     const handleCreate = () => {
         createProfile(newForm);
+        navigate('/');
     }
 
     return (
