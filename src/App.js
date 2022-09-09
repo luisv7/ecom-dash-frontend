@@ -3,12 +3,15 @@ import { auth, onAuthStateChanged } from './firebase';
 import Main from './components/Main';
 import Menu from './components/Menu';
 import './App.css';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
   const [ user, setUser ] = useState(null);
   const [ profiles, setProfiles ] = useState([]);
 
   const API_PROFILES = 'https://ecom-dash-v1.herokuapp.com/api/profiles';
+
+  const navigate = useNavigate();
 
   // PROFILES
   const getProfiles = async () => {
@@ -42,6 +45,7 @@ function App() {
           console.log(error)
       }
       getProfiles();
+      navigate('/');
   }
 
   useEffect(() => {    
