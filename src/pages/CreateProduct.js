@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TextField, Box, Paper, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const CreateProduct = ({createProducts}) => {
     const [newForm, setNewForm ] = useState({
@@ -90,7 +90,7 @@ const CreateProduct = ({createProducts}) => {
                         <TextField
                             type="text"
                             id="outlined-number"
-                            label="Image"
+                            label="Image URL"
                             name="image"
                             value={newForm.image}
                             onChange={handleChange}
@@ -191,7 +191,9 @@ const CreateProduct = ({createProducts}) => {
                 </Paper>
                 <Box className="create-form-button-container">
                     <Button type="submit" variant="contained">Create Item</Button>
-                    <Button type="button" variant='contained' color="error" href="/admin/products">Cancel</Button>
+                    <Link to='/admin/products'>
+                        <Button type="button" variant="contained" color="error">Cancel</Button>
+                    </Link>
                 </Box>
             </Box>
         </>

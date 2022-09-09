@@ -120,8 +120,12 @@ h3{
 .create-form-button-container{
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 1rem;
   height: 2.7rem;
+}
+.create-form-button-container a{
+  text-decoration: none;
 }
 .create-text-field-container{
   display: flex;

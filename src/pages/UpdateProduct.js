@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { Box } from "@mui/system";
 import { TextField, Button, Paper } from "@mui/material";
 
@@ -101,7 +101,7 @@ const UpdateProduct = ({products, updateProduct}) => {
                     <TextField
                         type="text"
                         id="outlined-number"
-                        label="Image"
+                        label="Image URL"
                         name="image"
                         value={updateForm.image}
                         onChange={handleChange}
@@ -202,7 +202,9 @@ const UpdateProduct = ({products, updateProduct}) => {
                 </Paper>
                 <Box className="create-form-button-container">
                     <Button type="submit" variant="contained">Update Item</Button>
-                    <Button type="button" variant='contained' color="error" href="/admin/products">Cancel</Button>
+                    <Link to='/admin/products'>
+                        <Button type="button" variant="contained" color="error">Cancel</Button>
+                    </Link>
                 </Box>
             </Box>
         </>
