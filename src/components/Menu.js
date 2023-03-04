@@ -10,7 +10,7 @@ const Menu = ({user, profiles, getProfiles}) => {
   });
 
   const loading = () => {
-    return <h1>Loading...</h1>
+    return <h1>Loading Fetching Data...</h1>
   }
 
   const userProfile = profiles.find((el) => {
