@@ -194,6 +194,8 @@ h3{
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 1rem;
+  flex-direction: column;
+  align-items: center;
 }
 .home-info-container a{
   text-decoration: none;
